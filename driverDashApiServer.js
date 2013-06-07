@@ -10,7 +10,9 @@ app.get('/', function(request, response) {
 });
 
 app.get('/user', function(request, response) {
-  response.send('Driver DASH API User');
+  var ui = require("./userinfo.js");
+  var name = ui.firstName(1);
+  response.send('Driver DASH API User'+name);
 });
 
 app.get('/backup', function(request, response) {
