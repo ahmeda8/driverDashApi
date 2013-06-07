@@ -4,7 +4,7 @@ var app = express();
 app.use(express.logger());
 
 app.get('/', function(request, response) {
-  response.send('Hello World!');
+  response.send('Hello World!'+process.env);
 });
 
 var port = process.env.PORT;
