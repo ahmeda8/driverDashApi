@@ -1,6 +1,7 @@
 #cloud 9 io specific ignore files
 
 .c9revisions/*
+node_modules/*
 
 #################
 ## Eclipse
