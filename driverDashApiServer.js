@@ -11,7 +11,8 @@ app.get('/', function(request, response) {
 
 app.get('/user', function(request, response) {
   var ui = require("./userinfo.js");
-  var name = ui.firstName(1);
+  //var name = ui.firstName(1);
+  var name = util.inspect(ui);
   response.send('Driver DASH API User'+name);
 });
 
