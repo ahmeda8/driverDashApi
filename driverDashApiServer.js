@@ -8,7 +8,7 @@ app.use(express.logger());
 app.get('/', function(request, response) {
 
 
-
+/*
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   var query = client.query('SELECT * FROM your_table');
 
@@ -16,8 +16,8 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
     console.log(JSON.stringify(row));
   });
 });
-
-  response.send('Hello World!'+util.inspect(process.env));
+*/
+  response.send('Driver DASH API!');
 });
 
 var port = process.env.PORT;
