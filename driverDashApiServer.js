@@ -6,18 +6,19 @@ var app = express();
 app.use(express.logger());
 
 app.get('/', function(request, response) {
-
-
-/*
-pg.connect(process.env.DATABASE_URL, function(err, client) {
-  var query = client.query('SELECT * FROM your_table');
-
-  query.on('row', function(row) {
-    console.log(JSON.stringify(row));
-  });
+  response.send('Driver DASH API Root');
 });
-*/
-  response.send('Driver DASH API!');
+
+app.get('/user', function(request, response) {
+  response.send('Driver DASH API User');
+});
+
+app.get('/backup', function(request, response) {
+  response.send('Driver DASH API! Backup');
+});
+
+app.get('/restore', function(request, response) {
+  response.send('Driver DASH API! Resttore');
 });
 
 var port = process.env.PORT;
