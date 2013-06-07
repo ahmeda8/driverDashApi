@@ -1,6 +1,6 @@
 //user info module
 
-exports.getName = function firstName(id)
+exports.getName = function (id)
 {
 	return "Deborah";
 }
