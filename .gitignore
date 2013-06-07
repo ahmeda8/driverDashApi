@@ -1,3 +1,7 @@
+#cloud 9 io specific ignore files
+
+.c9revisions/*
+
 #################
 ## Eclipse
 #################

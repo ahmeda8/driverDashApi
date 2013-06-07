@@ -1,0 +1,22 @@
+{
+  "name": "driverDashApiServer",
+  "version": "1.0.0",
+  "description": "api server for driverDash winodws phone app",
+  "main": "driverDashApiServer.js",
+  "dependencies": {
+    "express": "3.1.x"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ahmeda8/driverDashApi.git"
+  },
+  "author": "Abrar Ahmed",
+  "license": "BSD"
+}
