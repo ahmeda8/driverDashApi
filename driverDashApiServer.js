@@ -17,8 +17,14 @@ app.get('/user/:id/:fbid', function(req, response) {
   response.send(util.inspect(app.routes));
 });
 
-app.get('/backup', function(request, response) {
-  response.send('Driver DASH API! Backup');
+app.get('/backup/:fbid', function(request, response) {
+    var savefile = require("./savefile.js");
+    var ex;
+    savefile.directoryExists("backups",function(exists)
+        {
+            ex = exists;
+        });
+  response.send('Driver DASH API! Backup'+ex);
 });
 
 app.get('/restore', function(request, response) {
