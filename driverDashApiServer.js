@@ -14,6 +14,7 @@ app.get('/user/:id/:fbid', function(req, response) {
   var name = ui.getName(1);
   //var name = util.inspect(ui);
   response.send('Driver DASH API User'+name+"---"+req.params.id+"---"+req.params.fbid);
+  response.send(util.inspect(app.routes));
 });
 
 app.get('/backup', function(request, response) {
