@@ -24,7 +24,7 @@ app.get('/backup/:fbid', function(request, response) {
         {
         if(!exists)
             fs.mkdir(directory,777,function(params){
-                response.send('Driver DASH API! Backup'+exists);    
+                response.send('Driver DASH API! Backup'+params);    
             });
             
         });
