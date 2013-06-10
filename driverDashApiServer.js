@@ -19,8 +19,10 @@ app.get('/user/:id/:fbid', function(req, response) {
 
 app.get('/backup/:fbid', function(request, response) {
     var savefile = require("./savefile.js");
-    savefile.directoryExists("backups",ExistsVal);
     var ex = function ExistsVal(exists){return exists;};
+    
+    savefile.directoryExists("backups",ExistsVal);
+    
     response.send("backup "+util.inspect(ex));
 });
 
