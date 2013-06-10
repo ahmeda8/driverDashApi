@@ -19,16 +19,9 @@ app.get('/user/:id/:fbid', function(req, response) {
 
 app.get('/backup/:fbid', function(request, response) {
     var savefile = require("./savefile.js");
-    var ex;
-    savefile.directoryExists("backups",function(exists)
-        {
-        if(!exists)
-            fs.mkdir(directory,777,function(params){
-                response.send('Driver DASH API! Backup'+params);    
-            });
-            
-        });
- 
+    savefile.directoryExists("backups",ExistsVal);
+    var ex = function ExistsVal(exists){return exists;};
+    response.send("backup "+util.inspect(ex));
 });
 
 app.get('/restore', function(request, response) {
