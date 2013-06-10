@@ -19,9 +19,13 @@ app.get('/user/:id/:fbid', function(req, response) {
 
 app.get('/backup/:fbid', function(request, response) {
     var savefile = require("./savefile.js");
-    var ex = function ExistsVal(exists){return exists;};
     
-    savefile.directoryExists("backups",ExistsVal);
+    savefile.directoryExists("backups",function(exists){
+        if(!exists)
+            fs.mkdir("backups",777,function(err){
+                response.send("backup created directorey");
+            });
+    });
     
     response.send("backup "+util.inspect(ex));
 });
