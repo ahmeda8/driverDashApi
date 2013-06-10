@@ -22,8 +22,8 @@ app.get('/backup/:fbid', function(request, response) {
     
     savefile.directoryExists("backups",function(exists){
         if(!exists)
-            fs.mkdir("backups",777,function(err){
-                response.send("backup created directorey");
+            savefile.createDirectory("backups",function(err){
+                response.send("created directory backups");
             });
     });
     
