@@ -25,9 +25,11 @@ app.get('/backup/:fbid', function(request, response) {
             savefile.createDirectory("backups",function(err){
                 response.send("created directory backups"+util.inspect(err));
             });
+        else
+            response.send("directory already exists");
     });
     
-    response.send("backup regular");
+    //response.send("backup regular");
 });
 
 app.get('/restore', function(request, response) {
