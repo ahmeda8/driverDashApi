@@ -27,7 +27,7 @@ app.get('/backup/:fbid', function(request, response) {
             });
     });
     
-    //response.send("backup "+util.inspect(ex));
+    response.send("backup regular");
 });
 
 app.get('/restore', function(request, response) {
