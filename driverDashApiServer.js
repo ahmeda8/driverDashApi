@@ -23,7 +23,7 @@ app.get('/backup/:fbid', function(request, response) {
     savefile.directoryExists("backups",function(exists){
         if(!exists)
             savefile.createDirectory("backups",function(err){
-                response.send("created directory backups");
+                response.send("created directory backups"+util.inspect(err));
             });
     });
     
