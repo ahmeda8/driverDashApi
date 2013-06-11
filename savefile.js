@@ -11,7 +11,7 @@ exports.createDirectory = function(directory,callback)
     fs.mkdir(directory,777,callback);
 }
 
-exports.directoryStat = function(direcotry,callback)
+exports.directoryStat = function(directory,callback)
 {
     fs.lstat(directory,callback);
 }
