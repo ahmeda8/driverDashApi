@@ -2,6 +2,7 @@
 var express = require("express");
 var util = require("util");
 var pg = require('pg');
+var querystring = require("querystring");
 var app = express();
 var fs = require("fs");
 app.use(express.logger());
@@ -20,7 +21,10 @@ app.get('/user/:id/:fbid', function(req, response) {
 });
 
 app.post('/backup/:fbid', function(request, response) {
-	response.send(util.inspect(request.body.info));
+	
+	var info = JSON.parse(request.body.info);
+	response.send(util.inspect(info.url));
+	
 });
 
 app.get('/restore', function(request, response) {
