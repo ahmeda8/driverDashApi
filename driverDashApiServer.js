@@ -3,6 +3,7 @@ var express = require("express");
 var util = require("util");
 var pg = require('pg');
 var app = express();
+var fs = require("fs");
 app.use(express.logger());
 
 app.get('/', function(request, response) {
@@ -18,29 +19,30 @@ app.get('/user/:id/:fbid', function(req, response) {
 });
 
 app.get('/backup/:fbid', function(request, response) {
-    var savefile = require("./savefile.js");
+	var directory = "backup3";
+	var res = "";
+	fs.exists(directory,function(exists){
+		if(!exists)
+		{
+			fs.mkdir(directory,function(err){
+				response.send(util.inspect(err));
+			});
+		}
+		else
+		{
+			var path  = fs.realpathSync(directory);
+			response.send(util.inspect(path));
+		}
+	});
     
-    savefile.directoryExists("backups",function(exists){
-        if(!exists)
-            savefile.createDirectory("backups",function(err){
-                response.send("created directory backups"+util.inspect(err));
-            });
-        else
-        {
-            savefile.directoryStat("backups",function(err,stat){
-                response.send("directory already exists"+util.inspect(stat));    
-            });
-        }
-    });
-    
-    //response.send("backup regular");
+	
 });
 
 app.get('/restore', function(request, response) {
   response.send('Driver DASH API! Resttore');
 });
 
-var port = process.env.PORT;
+var port = process.env.PORT | 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
