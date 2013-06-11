@@ -27,7 +27,7 @@ app.get('/backup/:fbid', function(request, response) {
             });
         else
         {
-            saveFile.directoryStat("backups",function(err,stat){
+            savefile.directoryStat("backups",function(err,stat){
                 response.send("directory already exists"+util.inspect(stat));    
             });
         }
