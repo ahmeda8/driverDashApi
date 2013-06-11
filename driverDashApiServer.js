@@ -5,6 +5,7 @@ var pg = require('pg');
 var app = express();
 var fs = require("fs");
 app.use(express.logger());
+app.use(express.bodyParser());
 
 app.get('/', function(request, response) {
   response.send('Driver DASH API Root');
@@ -18,22 +19,8 @@ app.get('/user/:id/:fbid', function(req, response) {
   response.send(util.inspect(app.routes));
 });
 
-app.get('/backup/:fbid', function(request, response) {
-	var directory = "backup3";
-	var res = "";
-	fs.exists(directory,function(exists){
-		if(!exists)
-		{
-			fs.mkdir(directory,function(err){
-				response.send(util.inspect(err));
-			});
-		}
-		else
-		{
-			var path  = fs.realpathSync(directory);
-			response.send(util.inspect(path));
-		}
-	});
+app.post('/backup/:fbid', function(request, response) {
+	response.send(util.inspect(request.body.info));
 });
 
 app.get('/restore', function(request, response) {
