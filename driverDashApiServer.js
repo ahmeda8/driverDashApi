@@ -34,8 +34,6 @@ app.get('/backup/:fbid', function(request, response) {
 			response.send(util.inspect(path));
 		}
 	});
-    
-	
 });
 
 app.get('/restore', function(request, response) {
