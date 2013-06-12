@@ -53,10 +53,9 @@ exports.getBackups = function(fbid,callback)
 		};
 	client.connect();
 	client.query(sql);
-	var returnData = [];
-	client.on("row",function(row){
-		console.log(row);
-		returnData.push(row);
+	client.on("end",function(result){
+		//console.log(row);
+		callback(result.rows);
 	});
-	callback(returnData);
+	
 };
