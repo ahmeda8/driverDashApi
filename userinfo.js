@@ -52,9 +52,7 @@ exports.getBackups = function(fbid,callback)
 		values:[fbid]
 		};
 	client.connect();
-	client.query(sql);
-	client.on("end",function(result){
-		//console.log(row);
+	client.query(sql,function(err,result){
 		callback(result.rows);
 	});
 	
