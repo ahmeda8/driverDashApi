@@ -57,11 +57,11 @@ exports.getBackups = function(id,callback)
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
 	//var client = new pg.Client(conOptions);
 	
-	console.log(client);
+	//console.log(client);
 	var sql = {
 		text:"SELECT * from backupfiles " +
 			 "WHERE backupfiles.id_user = $1",
-		values:[fbid]
+		values:[id]
 		};
 	client.connect();
 	client.query(sql,function(err,result){
