@@ -32,6 +32,7 @@ exports.getUserByFacebook = function(fbid,callback)
 exports.addBackupFile = function(fileInfo,callback)
 {
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
+	client.ssl = true;
 	client.connect();
 	if(id!=null)
 	{
@@ -63,10 +64,20 @@ exports.getBackups = function(id,callback)
 			 "WHERE backupfiles.id_user = $1",
 		values:[id]
 		};
-	client.connect();
-	client.query(sql,function(err,result){
+	client.connect(function(err){
 		console.log(err);
-		callback(result.rows);
+		if(err.code ==0)
+		{
+			client.query(sql,function(err,result){
+				console.log(err);
+				callback(result.rows);
+			});
+		}
+		else
+		{
+			callback([]);
+		}
 	});
+	
 	
 };
