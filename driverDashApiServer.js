@@ -26,7 +26,7 @@ app.post('/user',function(req,res)
 		res.send(util.inspect(result));
 	});
 	
-	res.send("ok");
+	//res.send("ok");
 });
 
 app.get('/user/:id/:fbid', function(req, response) {
