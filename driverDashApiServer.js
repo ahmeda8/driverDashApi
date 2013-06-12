@@ -14,14 +14,19 @@ app.get('/', function(request, response) {
 
 app.post('/user',function(req,res)
 {
-	global.process.HEROKU_POSTGRESQL_SILVER_URL = "postgres://ydgammzyfnciqp:8Z0VP8iiaO9qeWrmpQYROn0fpc@ec2-107-20-215-249.compute-1.amazonaws.com:5432/d9d08kbuji2has";
+	if(!process.env.HEROKU_POSTGRESQL_SILVER_URL)
+		process.env.HEROKU_POSTGRESQL_SILVER_URL = "postgres://ydgammzyfnciqp:8Z0VP8iiaO9qeWrmpQYROn0fpc@ec2-107-20-215-249.compute-1.amazonaws.com:5432/d9d08kbuji2has";
 	
 	var userObj = JSON.parse(req.body.user);
 	var ui = require("./userinfo.js");
+	//console.log(process);
+	
 	ui.createUser(userObj,function(err,result)
 	{
 		res.send(util.inspect(result));
 	});
+	
+	res.send("ok");
 });
 
 app.get('/user/:id/:fbid', function(req, response) {
