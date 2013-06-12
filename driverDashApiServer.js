@@ -29,7 +29,7 @@ app.post('/user',function(req,res)
 	//res.send("ok");
 });
 
-app.get('/user/:id/:fbid', function(req, response) {
+app.get('/user/:fbid', function(req, response) {
   var ui = require("./userinfo.js");
   var name = ui.getName(1);
   //var name = util.inspect(ui);
@@ -40,9 +40,11 @@ app.get('/user/:id/:fbid', function(req, response) {
 app.post('/backup/:fbid', function(request, response) {
 	
 	var info = JSON.parse(request.body.info);
-	var query = "INSERT INTO backups('id','url','time')";
-	response.send(util.inspect(info.url));
-	
+	var ui = require("./userinfo.js");
+	ui.addBackupFile(info,function(err,result)
+	{
+		response.send(util.inspect(result));
+	});
 });
 
 app.get('/restore', function(request, response) {

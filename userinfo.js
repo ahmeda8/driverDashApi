@@ -14,4 +14,15 @@ exports.createUser = function(userObj,callback)
 		//console.log(err);
 		client.query(sql,callback);
 		});
-}
+};
+
+exports.addBackupFile = function(fileInfo,callback)
+{
+	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
+	var sql = {
+		text:"select * from users where fb_id = $1",
+		values:[fileInfo.fbid]
+		};
+	client.connect();
+	client.query(sql,callback);
+};
