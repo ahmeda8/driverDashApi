@@ -43,6 +43,7 @@ exports.addBackupFile = function(fileInfo,callback)
 
 exports.getBackups = function(fbid,callback)
 {
+	console.log(fbid);
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
 	var sql = {
 		text:"SELECT * from backupfiles " +
