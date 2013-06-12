@@ -24,18 +24,38 @@ exports.addBackupFile = function(fileInfo,callback)
 		values:[fileInfo.fbid]
 		};
 	client.connect();
-	var id;
+	var id = null;
 	client.query(sql,function(err,result){
 		//console.log(err);
 		//console.log(result);
 		if(result.rows[0] && result.rowCount == 1)
 			id = result.rows[0].id;
 	});
-	
-	sql = {
-		text:"INSERT INTO backupfiles (filename,download_url,created,id_user) values ($1,$2,$3,$4)",
-		values:[fileInfo.filename,fileInfo.download_url,fileInfo.created,id]
+	if(id!=null)
+	{
+		sql = {
+			text:"INSERT INTO backupfiles (filename,download_url,created,id_user) values ($1,$2,$3,$4)",
+			values:[fileInfo.filename,fileInfo.download_url,fileInfo.created,id]
+			};
+		client.query(sql,callback);
+	}
+};
+
+exports.getBackups = function(fbid,callback)
+{
+	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
+	var sql = {
+		text:"SELECT * from backupfiles " +
+			 "JOIN users on user.id = backupfiles.id_user " +
+			 "WHERE users.fb_id = $1",
+		values:[fbid]
 		};
-	client.query(sql,callback);
-	
+	client.connect();
+	client.query(sql);
+	var returnData = null;
+	var i=0;
+	client.on('row',function(row){
+		returnData[i++] = row;
+	});
+	callback(returnData);
 };

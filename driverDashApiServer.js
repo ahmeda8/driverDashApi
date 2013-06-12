@@ -29,12 +29,11 @@ app.post('/user',function(req,res)
 	//res.send("ok");
 });
 
-app.get('/user/:fbid', function(req, response) {
+app.get('/user/backups/:fbid', function(req, response) {
   var ui = require("./userinfo.js");
-  var name = ui.getName(1);
-  //var name = util.inspect(ui);
-  response.send('Driver DASH API User'+name+"---"+req.params.id+"---"+req.params.fbid);
-  response.send(util.inspect(app.routes));
+  ui.getBackups(req.params.fbid,function(data){
+	  response.send(util.inspect(data));
+  });
 });
 
 app.post('/backup', function(request, response) {
@@ -49,9 +48,11 @@ app.post('/backup', function(request, response) {
 	//response.send("ok");
 });
 
-app.get('/restore', function(request, response) {
+app.get('/restore/:id', function(request, response) {
   response.send('Driver DASH API! Resttore');
 });
+
+
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
