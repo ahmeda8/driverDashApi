@@ -27,12 +27,17 @@ exports.addBackupFile = function(fileInfo,callback)
 	var id;
 	client.query(sql,function(err,result){
 		console.log(err);
+		console.log(result);
+		/*
 		if(result.row[0] && result.rowCount == 1)
 			id = result.row[0].id;
+			*/
 	});
+	/*
 	sql = {
 		text:"INSERT INTO backupfiles (filename,download_url,created,id_user) values ($1,$2,$3,$4)",
 		values:[fileInfo.filename,fileInfo.dowload_url,fileInfo.created,id]
 		};
 	client.query(sql,callback);
+	*/
 };

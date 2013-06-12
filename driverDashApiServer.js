@@ -46,6 +46,7 @@ app.post('/backup', function(request, response) {
 	{
 		response.send(util.inspect(result));
 	});
+	response.send("ok");
 });
 
 app.get('/restore', function(request, response) {
