@@ -55,6 +55,7 @@ exports.getBackups = function(fbid,callback)
 	var returnData = null;
 	var i=0;
 	client.on('row',function(row){
+		console.log(row);
 		returnData[i++] = row;
 	});
 	callback(returnData);
