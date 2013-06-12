@@ -26,7 +26,7 @@ app.get('/user/:fbid',function(req,res) {
 	ui.getUserByFacebook(req.params.fbid,function(err,result){
 		res.send(util.inspect(result.rows[0]));
 	});
-};
+});
 
 app.get('/user/backups/:iduser', function(req, response) {
   var ui = require("./userinfo.js");
