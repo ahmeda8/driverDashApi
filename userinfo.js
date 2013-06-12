@@ -66,7 +66,7 @@ exports.getBackups = function(id,callback)
 		};
 	client.connect(function(err){
 		console.log(err);
-		if(err.code ==0)
+		if(err != null)
 		{
 			client.query(sql,function(err,result){
 				console.log(err);
