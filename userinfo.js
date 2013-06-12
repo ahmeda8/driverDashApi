@@ -26,6 +26,7 @@ exports.addBackupFile = function(fileInfo,callback)
 	client.connect();
 	var id;
 	client.query(sql,function(err,result){
+		console.log(err);
 		if(result.row[0] && result.rowCount == 1)
 			id = result.row[0].id;
 	});
