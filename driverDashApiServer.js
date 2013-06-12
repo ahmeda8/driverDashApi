@@ -37,7 +37,7 @@ app.get('/user/:fbid', function(req, response) {
   response.send(util.inspect(app.routes));
 });
 
-app.post('/backup/:fbid', function(request, response) {
+app.post('/backup', function(request, response) {
 	
 	var info = JSON.parse(request.body.info);
 	var ui = require("./userinfo.js");
