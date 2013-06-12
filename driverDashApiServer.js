@@ -23,7 +23,7 @@ app.post('/user',function(req,res)
 	
 	ui.createUser(userObj,function(err,result)
 	{
-		res.send(util.inspect(result));
+		res.send(util.inspect(err));
 	});
 	
 	//res.send("ok");
