@@ -34,7 +34,7 @@ exports.addBackupFile = function(fileInfo,callback)
 	
 	sql = {
 		text:"INSERT INTO backupfiles (filename,download_url,created,id_user) values ($1,$2,$3,$4)",
-		values:[fileInfo.filename,fileInfo.dowload_url,fileInfo.created,id]
+		values:[fileInfo.filename,fileInfo.download_url,fileInfo.created,id]
 		};
 	client.query(sql,callback);
 	
