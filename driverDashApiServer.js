@@ -12,6 +12,18 @@ app.get('/', function(request, response) {
   response.send('Driver DASH API Root');
 });
 
+app.post('/user',function(req,res)
+{
+	global.process.HEROKU_POSTGRESQL_SILVER_URL = "postgres://ydgammzyfnciqp:8Z0VP8iiaO9qeWrmpQYROn0fpc@ec2-107-20-215-249.compute-1.amazonaws.com:5432/d9d08kbuji2has";
+	
+	var userObj = JSON.parse(req.body.user);
+	var ui = require("./userinfo.js");
+	ui.createUser(userObj,function(err,result)
+	{
+		res.send(util.inspect(result));
+	});
+});
+
 app.get('/user/:id/:fbid', function(req, response) {
   var ui = require("./userinfo.js");
   var name = ui.getName(1);
@@ -23,6 +35,7 @@ app.get('/user/:id/:fbid', function(req, response) {
 app.post('/backup/:fbid', function(request, response) {
 	
 	var info = JSON.parse(request.body.info);
+	var query = "INSERT INTO backups('id','url','time')";
 	response.send(util.inspect(info.url));
 	
 });
