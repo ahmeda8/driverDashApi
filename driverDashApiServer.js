@@ -40,6 +40,7 @@ app.get('/user/:fbid', function(req, response) {
 app.post('/backup', function(request, response) {
 	
 	var info = JSON.parse(request.body.info);
+	console.log(info);
 	var ui = require("./userinfo.js");
 	ui.addBackupFile(info,function(err,result)
 	{
