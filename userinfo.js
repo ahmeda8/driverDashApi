@@ -10,10 +10,10 @@ exports.createUser = function(userObj,callback)
 			values:[userObj.fbid,userObj.email,userObj.created,userObj.last_login,userObj.firstname,userObj.lastname]
 			};
 	
-	client.connect();
-	
-	client.query(sql,function(err,result){
+	client.connect(function(err){
 		console.log(err);
-		client.end();
-	});
+		client.query(sql,function(err,result){
+			client.end();
+		});
+		});
 }
