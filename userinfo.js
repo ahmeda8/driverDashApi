@@ -47,7 +47,7 @@ exports.getBackups = function(fbid,callback)
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
 	var sql = {
 		text:"SELECT * from backupfiles " +
-			 "JOIN users on user.id = backupfiles.id_user " +
+			 "JOIN users on users.id = backupfiles.id_user " +
 			 "WHERE users.fb_id = $1",
 		values:[fbid]
 		};
