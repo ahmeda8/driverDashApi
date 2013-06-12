@@ -1,37 +1,36 @@
 //node js main se4rver file
 var express = require("express");
 var util = require("util");
-var pg = require('pg');
 var querystring = require("querystring");
 var app = express();
-var fs = require("fs");
 app.use(express.logger());
 app.use(express.bodyParser());
 
-app.get('/', function(request, response) {
-  response.send('Driver DASH API Root');
-});
+if(!process.env.HEROKU_POSTGRESQL_SILVER_URL)
+		process.env.HEROKU_POSTGRESQL_SILVER_URL = "postgres://ydgammzyfnciqp:8Z0VP8iiaO9qeWrmpQYROn0fpc@ec2-107-20-215-249.compute-1.amazonaws.com:5432/d9d08kbuji2has";
 
 app.post('/user',function(req,res)
 {
-	if(!process.env.HEROKU_POSTGRESQL_SILVER_URL)
-		process.env.HEROKU_POSTGRESQL_SILVER_URL = "postgres://ydgammzyfnciqp:8Z0VP8iiaO9qeWrmpQYROn0fpc@ec2-107-20-215-249.compute-1.amazonaws.com:5432/d9d08kbuji2has";
 	
 	var userObj = JSON.parse(req.body.user);
 	var ui = require("./userinfo.js");
-	//console.log(process);
 	
 	ui.createUser(userObj,function(err,result)
 	{
 		res.send(util.inspect(err));
 	});
-	
-	//res.send("ok");
 });
 
-app.get('/user/backups/:fbid', function(req, response) {
+app.get('/user/:fbid',function(req,res) {
+	var ui = require("./userinfo.js");
+	ui.getUserByFacebook(req.params.fbid,function(err,result){
+		res.send(util.inspect(result.rows[0]));
+	});
+};
+
+app.get('/user/backups/:iduser', function(req, response) {
   var ui = require("./userinfo.js");
-  ui.getBackups(req.params.fbid,function(data){
+  ui.getBackups(req.params.iduser,function(data){
 	  response.send(util.inspect(data));
   });
 });
@@ -47,11 +46,6 @@ app.post('/backup', function(request, response) {
 	});
 	//response.send("ok");
 });
-
-app.get('/restore/:id', function(request, response) {
-  response.send('Driver DASH API! Resttore');
-});
-
 
 
 var port = process.env.PORT || 5000;

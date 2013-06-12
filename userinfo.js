@@ -16,39 +16,51 @@ exports.createUser = function(userObj,callback)
 		});
 };
 
-exports.addBackupFile = function(fileInfo,callback)
+exports.getUserByFacebook = function(fbid,callback)
 {
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
 	var sql = {
-		text:"select * from users where fb_id = $1",
-		values:[fileInfo.fbid]
-		};
+			text:"select * from users where fb_id = $1",
+			values:[fbid]
+			};
+	
+	client.connect(function(err){
+		client.query(sql,callback);
+		});
+};
+
+exports.addBackupFile = function(fileInfo,callback)
+{
+	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
 	client.connect();
-	var id = null;
-	client.query(sql,function(err,result){
-		//console.log(err);
-		//console.log(result);
-		if(result.rows[0] && result.rowCount == 1)
-			id = result.rows[0].id;
-	});
 	if(id!=null)
 	{
 		sql = {
 			text:"INSERT INTO backupfiles (filename,download_url,created,id_user) values ($1,$2,$3,$4)",
-			values:[fileInfo.filename,fileInfo.download_url,fileInfo.created,id]
+			values:[fileInfo.filename,fileInfo.download_url,fileInfo.created,fileInfo.iduser]
 			};
 		client.query(sql,callback);
 	}
 };
 
-exports.getBackups = function(fbid,callback)
+exports.getBackups = function(id,callback)
 {
-	console.log(fbid);
+	//console.log(fbid);
+	/*
+	var conOptions = {
+	user:'ydgammzyfnciqp',
+	password:'8Z0VP8iiaO9qeWrmpQYROn0fpc',
+	database:'d9d08kbuji2has',
+	host:'ec2-107-20-215-249.compute-1.amazonaws.com',
+	ssl:true
+	};*/
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
+	//var client = new pg.Client(conOptions);
+	
+	console.log(client);
 	var sql = {
 		text:"SELECT * from backupfiles " +
-			 "JOIN users on users.id = backupfiles.id_user " +
-			 "WHERE users.fb_id = $1",
+			 "WHERE backupfiles.id_user = $1",
 		values:[fbid]
 		};
 	client.connect();
