@@ -12,9 +12,6 @@ exports.createUser = function(userObj,callback)
 	
 	client.connect(function(err){
 		//console.log(err);
-		client.query(sql,function(err,result){
-			client.end();
-			callback();
-		});
+		client.query(sql,callback);
 		});
 }
