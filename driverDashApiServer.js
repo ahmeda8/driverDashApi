@@ -16,12 +16,12 @@ app.post('/user',function(req,res)
 	var ui = require("./userinfo.js");
 	ui.addUser(userObj,function(err,result)
 	{
-		if(err ==null)
-			res.send(util.inspect(err));
+		if(err == null)
+			res.send(util.inspect(result));
 		else
 		{
 			ui.getUserByFacebook(userObj.fbid,function(err,result){
-				res.send(util.inspect(err));
+				res.send(util.inspect(result));
 			});
 		}
 	});
