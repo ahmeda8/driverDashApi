@@ -53,6 +53,7 @@ function query(sql,callback)
 
 function handleERR(type,err,callback)
 {
+	console.log(err);
 	switch(type)
 	{
 		case 0:
