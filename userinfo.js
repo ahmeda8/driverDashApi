@@ -8,7 +8,13 @@ exports.addUser = function(userObj,callback)
 			text:"INSERT INTO users (fb_id,email,created,last_login,first_name,last_name) values ($1,$2,$3,$4,$5,$6)",
 			values:[userObj.fbid,userObj.email,userObj.created,userObj.last_login,userObj.firstname,userObj.lastname]
 		};
-	query(sql,callback);
+	query(sql,function(err,result){
+		var sql1 = {
+			text:"SELECT * from users WHERE fb_id =$1",
+			values:[userObj.fbid]
+		};
+		query(sql1,callback);
+	});
 	
 };
 
