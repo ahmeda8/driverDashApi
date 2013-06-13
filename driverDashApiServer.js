@@ -30,8 +30,8 @@ app.get('/user/:fbid',function(req,res) {
 
 app.get('/user/backups/:iduser', function(req, response) {
   var ui = require("./userinfo.js");
-  ui.getBackups(req.params.iduser,function(data){
-	  response.send(util.inspect(data));
+  ui.getBackups(req.params.iduser,function(err,data){
+	  response.send(util.inspect(data.rows));
   });
 });
 
