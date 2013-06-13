@@ -19,9 +19,11 @@ app.post('/user',function(req,res)
 		if(err ==null)
 			res.send(util.inspect(err));
 		else
+		{
 			ui.getUserByFacebook(userObj.fbid,function(err,result){
 				res.send(util.inspect(err));
 			});
+		}
 	});
 });
 
