@@ -1,7 +1,7 @@
 //user info module
 var pg = require("pg");
 
-exports.createUser = function(userObj,callback)
+exports.addUser = function(userObj,callback)
 {
 	//console.log(userObj);
 	var sql = {
@@ -21,7 +21,7 @@ exports.getUserByFacebook = function(fbid,callback)
 	query(sql,callback);
 };
 
-exports.addBackupFile = function(fileInfo,callback)
+exports.addBackup = function(fileInfo,callback)
 {
 	var sql = {
 			text:"INSERT INTO backupfiles (filename,download_url,created,id_user) values ($1,$2,$3,$4)",
