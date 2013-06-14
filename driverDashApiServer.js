@@ -21,7 +21,7 @@ app.post('/user',function(req,res)
 		else
 		{
 			ui.getUserByFacebook(userObj.fbid,function(err,result){
-				res.send(JSON.stringify(result.rows));
+				res.send(JSON.stringify(result.rows[0]));
 			});
 		}
 	});
