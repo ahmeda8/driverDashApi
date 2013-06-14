@@ -57,6 +57,7 @@ function query(sql,callback)
 			client.query(sql,callback);
 		else
 			handleERR(0,err,callback);
+		client.end();
 	});
 }
 
