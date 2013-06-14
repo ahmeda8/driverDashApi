@@ -57,7 +57,7 @@ app.put('/user',function(req,res){
 app.get('/user/:fbid',function(req,res) {
 	var ui = require("./userinfo.js");
 	ui.getUserByFacebook(req.params.fbid,function(err,result){
-		res.send(JSON.stringify(result.rows[0]));
+		res.send(JSON.stringify(result));
 	});
 });
 
