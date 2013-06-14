@@ -54,10 +54,14 @@ function query(sql,callback)
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
 	client.connect(function(err){
 		if(err == null)
-			client.query(sql,callback);
+		{
+			client.query(sql,function(err,result){
+				client.end();
+				callback(err,result);
+			});
+		}
 		else
 			handleERR(0,err,callback);
-		client.end();
 	});
 }
 
