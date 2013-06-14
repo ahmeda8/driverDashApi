@@ -34,7 +34,7 @@ app.post('/backup', function(request, response) {
 	var ui = require("./userinfo.js");
 	ui.addBackup(info,function(err,result)
 	{
-		response.send(util.inspect(result));
+		response.send(JSON.stringify(result));
 	});
 });
 
@@ -45,14 +45,14 @@ app.post('/backup', function(request, response) {
 app.get('/user/:fbid',function(req,res) {
 	var ui = require("./userinfo.js");
 	ui.getUserByFacebook(req.params.fbid,function(err,result){
-		res.send(util.inspect(result.rows[0]));
+		res.send(JSON.stringify(result.rows[0]));
 	});
 });
 
 app.get('/user/backups/:iduser', function(req, response) {
   var ui = require("./userinfo.js");
   ui.getBackups(req.params.iduser,function(err,data){
-	  response.send(util.inspect(data.rows));
+	  response.send(JSON.stringify(data.rows));
   });
 });
 /*end get api*/
