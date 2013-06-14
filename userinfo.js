@@ -20,6 +20,15 @@ exports.getUserByFacebook = function(fbid,callback)
 	query(sql,callback);
 };
 
+exports.updateUser = function(userObj,callback)
+{
+	var sql = {
+		text:"UPDATE users SET email= $1 , last_login = $2 where id = $3",
+		values:[userObj.email,userObj.logintime,userObj.id]
+	};
+	query(sql,callback);
+}
+
 exports.addBackup = function(fileInfo,callback)
 {
 	var sql = {

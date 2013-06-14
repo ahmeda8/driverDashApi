@@ -40,6 +40,18 @@ app.post('/backup', function(request, response) {
 
 /*END POST API*/
 
+/* PUT /Updatre procedeures */
+
+app.put('/user',function(req,res){
+	var user = JSON.parse(req.boby.user);
+	var ui = require("./userinfo.js");
+	ui.updateUser(user,function(err,result)
+	{
+		response.send(JSON.stringify(result));
+	});
+};
+/*END PUT */
+
 /*START GET API*/
 
 app.get('/user/:fbid',function(req,res) {
