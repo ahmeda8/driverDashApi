@@ -49,7 +49,7 @@ app.put('/user',function(req,res){
 	{
 		response.send(JSON.stringify(result));
 	});
-};
+});
 /*END PUT */
 
 /*START GET API*/
