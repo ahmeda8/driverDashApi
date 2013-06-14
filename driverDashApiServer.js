@@ -43,7 +43,7 @@ app.post('/backup', function(request, response) {
 /* PUT /Updatre procedeures */
 
 app.put('/user',function(req,res){
-	var user = JSON.parse(req.boby.user);
+	var user = JSON.parse(req.body.user);
 	var ui = require("./userinfo.js");
 	ui.updateUser(user,function(err,result)
 	{
