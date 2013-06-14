@@ -47,7 +47,7 @@ app.put('/user',function(req,res){
 	var ui = require("./userinfo.js");
 	ui.updateUser(user,function(err,result)
 	{
-		response.send(JSON.stringify(result));
+		res.send(JSON.stringify(result));
 	});
 });
 /*END PUT */
