@@ -17,11 +17,11 @@ app.post('/user',function(req,res)
 	ui.addUser(userObj,function(err,result)
 	{
 		if(err == null)
-			res.send(util.inspect(result));
+			res.send(JSON.stringify(result));
 		else
 		{
 			ui.getUserByFacebook(userObj.fbid,function(err,result){
-				res.send(util.inspect(result));
+				res.send(JSON.stringify(result));
 			});
 		}
 	});
