@@ -21,7 +21,7 @@ app.post('/user',function(req,res)
 		else
 		{
 			ui.getUserByFacebook(userObj.fbid,function(err,result){
-				res.send(JSON.stringify(result));
+				res.send(JSON.stringify(result.rows));
 			});
 		}
 	});
@@ -57,7 +57,7 @@ app.put('/user',function(req,res){
 app.get('/user/:fbid',function(req,res) {
 	var ui = require("./userinfo.js");
 	ui.getUserByFacebook(req.params.fbid,function(err,result){
-		res.send(JSON.stringify(result));
+		res.send(JSON.stringify(result.rows));
 	});
 });
 
