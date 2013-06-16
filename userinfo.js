@@ -56,7 +56,7 @@ exports.deleteBackup = function(fileinfo,callback)
 		}
 		else
 		{
-			callback(null,"error"):
+			callback(null,"error");
 		}
 	});
 	
