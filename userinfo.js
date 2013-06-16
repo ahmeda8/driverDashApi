@@ -48,6 +48,7 @@ exports.deleteBackup = function(fileinfo,callback)
 	console.log(options)
 	if(options.protocol == 'http:')
 	{
+		options.port = 80;
 		http.request(options,function(res){
 			if(res.statusCode == 200)
 			{
@@ -65,6 +66,7 @@ exports.deleteBackup = function(fileinfo,callback)
 	}
 	else if(options.protocol == 'https:')
 	{
+		options.port = 443;
 		https.request(options,function(res){
 			if(res.statusCode == 200)
 			{
