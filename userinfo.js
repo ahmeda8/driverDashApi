@@ -46,6 +46,7 @@ exports.deleteBackup = function(fileinfo,callback)
 	var options = url.parse(fileinfo.url);
 	options.method = "DELETE";
 	console.log(options)
+	options.protocol ='http:';
 	if(options.protocol == 'http:')
 	{
 		options.port = 80;
@@ -64,6 +65,7 @@ exports.deleteBackup = function(fileinfo,callback)
 			}
 		});
 	}
+	/*
 	else if(options.protocol == 'https:')
 	{
 		options.port = 443;
@@ -86,7 +88,7 @@ exports.deleteBackup = function(fileinfo,callback)
 	{
 		callback(null,"protocol not supported");
 	}
-	
+	*/
 };
 
 exports.getBackups = function(id,callback)
