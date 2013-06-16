@@ -63,7 +63,7 @@ exports.deleteBackup = function(fileinfo,callback)
 			}
 		});
 	}
-	else if(option.protocol == 'https:')
+	else if(options.protocol == 'https:')
 	{
 		https.request(options,function(res){
 			if(res.statusCode == 200)
