@@ -1,5 +1,7 @@
 //user info module
-var pg = require("pg");
+var pg = require('pg');
+var http = require('http');
+var url = require('url');
 
 exports.addUser = function(userObj,callback)
 {
@@ -36,6 +38,29 @@ exports.addBackup = function(fileInfo,callback)
 			values:[fileInfo.filename,fileInfo.download_url,fileInfo.created,fileInfo.iduser]
 		};
 	query(sql,callback);
+};
+
+exports.deleteBackup = function(fileinfo,callback)
+{
+	var options = url.parse(fileinfo.url);
+	options.method = "DELETE";
+	console.log(options)
+	http.request(options,function(res){
+		if(res.statusCode == 200)
+		{
+			var sql = {
+				text:"DELETE from backupfiles where id = $1",
+				values:[fileInfo.id]
+			};
+			query(sql,callback);
+		}
+		else
+		{
+			callback(null,"error"):
+		}
+	});
+	
+	
 };
 
 exports.getBackups = function(id,callback)
