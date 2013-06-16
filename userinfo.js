@@ -1,6 +1,7 @@
 //user info module
 var pg = require('pg');
 var http = require('http');
+var https = require('https');
 var url = require('url');
 
 exports.addUser = function(userObj,callback)
@@ -45,21 +46,44 @@ exports.deleteBackup = function(fileinfo,callback)
 	var options = url.parse(fileinfo.url);
 	options.method = "DELETE";
 	console.log(options)
-	http.request(options,function(res){
-		if(res.statusCode == 200)
-		{
-			var sql = {
-				text:"DELETE from backupfiles where id = $1",
-				values:[fileInfo.id]
-			};
-			query(sql,callback);
-		}
-		else
-		{
-			callback(null,"error");
-		}
-	});
-	
+	if(options.protocol == 'http:')
+	{
+		http.request(options,function(res){
+			if(res.statusCode == 200)
+			{
+				var sql = {
+					text:"DELETE from backupfiles where id = $1",
+					values:[fileInfo.id]
+				};
+				query(sql,callback);
+			}
+			else
+			{
+				callback(null,"error");
+			}
+		});
+	}
+	else if(option.protocol == 'https:')
+	{
+		https.request(options,function(res){
+			if(res.statusCode == 200)
+			{
+				var sql = {
+					text:"DELETE from backupfiles where id = $1",
+					values:[fileInfo.id]
+				};
+				query(sql,callback);
+			}
+			else
+			{
+				callback(null,"error");
+			}
+		});
+	}
+	else
+	{
+		callback(null,"protocol not supported");
+	}
 	
 };
 
