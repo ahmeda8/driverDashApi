@@ -172,6 +172,7 @@ exports.getBackups = function(id,callback)
 function query(sql,callback)
 {
 	var client = new pg.Client(process.env.HEROKU_POSTGRESQL_SILVER_URL);
+	client.connectionParameters.ssl = true;
 	client.connect(function(err){
 		if(err == null)
 		{
