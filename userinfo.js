@@ -83,9 +83,12 @@ exports.deleteBackup = function(id,callback)
 	  console.log(e);
 	  callback(null,e);
 	});
-	});
 	
 	req.end();
+	
+	});
+	
+	
 
 	
 	/*
