@@ -57,7 +57,7 @@ exports.deleteBackup = function(id,callback)
 		method:'DELETE',
 		port:80,
 		headers:{
-			"content-length": fileinfo.url.length
+			"content-length": download_url.length
 		}
 	 };
 	 console.log(options);
@@ -68,7 +68,7 @@ exports.deleteBackup = function(id,callback)
 		{
 			var sql = {
 				text:"DELETE from backupfiles where id = $1",
-				values:[fileInfo.id]
+				values:[id]
 			};
 			query(sql,callback);
 		}
