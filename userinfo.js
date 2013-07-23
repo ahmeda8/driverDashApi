@@ -56,10 +56,13 @@ exports.deleteBackup = function(id,callback)
 		path:urlParsed.path+"?key=AQ4LQWd28TyS1wZtDX9Rjz",
 		method:'DELETE',
 		port:80,
+		headers:{
+			'Content-length':res.rows[0].download_url.length
+		}
 	 };
 	 console.log(options);
 	var req = http.request(options,function(res){
-		console.log(res.statusCode);
+		console.log("Status code: "+res.statusCode);
 		//console.log(options);
 		if(res.statusCode == 200)
 		{
