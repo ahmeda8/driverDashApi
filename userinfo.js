@@ -53,7 +53,7 @@ exports.deleteBackup = function(id,callback)
 	 var urlParsed = url.parse(res.rows[0].download_url);
 	 var options ={
 		hostname: urlParsed.hostname,
-		path:urlParsed.path,
+		path:urlParsed.path+"?key=AQ4LQWd28TyS1wZtDX9Rjz",
 		method:'DELETE',
 		port:80,
 		headers:{
