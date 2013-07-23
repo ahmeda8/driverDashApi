@@ -57,7 +57,7 @@ exports.deleteBackup = function(id,callback)
 		method:'DELETE',
 		port:80,
 		headers:{
-			"content-length": download_url.length
+			"content-length": res.rows[0].download_url.length
 		}
 	 };
 	 console.log(options);
