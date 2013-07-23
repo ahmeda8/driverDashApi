@@ -80,8 +80,8 @@ exports.deleteBackup = function(id,callback)
 	});
 	
 	req.on('error', function(e) {
-	  console.log(e);
-	  callback(null,e);
+	  console.log(e.message);
+	  callback(null,e.message);
 	});
 	
 	req.end();
