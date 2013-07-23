@@ -43,28 +43,43 @@ exports.addBackup = function(fileInfo,callback)
 
 exports.deleteBackup = function(fileinfo,callback)
 {
-	var options = url.parse(fileinfo.url);
-	options.method = "DELETE";
-	console.log(options)
-	options.protocol ='http:';
-	if(options.protocol == 'http:')
-	{
-		options.port = 80;
-		http.request(options,function(res){
-			if(res.statusCode == 200)
-			{
-				var sql = {
-					text:"DELETE from backupfiles where id = $1",
-					values:[fileInfo.id]
-				};
-				query(sql,callback);
-			}
-			else
-			{
-				callback(null,"error");
-			}
-		});
-	}
+	var urlParsed = url.parse(fileinfo.url);
+	 var options ={
+		hostname: urlParsed.hostname,
+		path:urlParsed.path,
+		method:'DELETE',
+		port:80,
+		headers:{
+			"content-length": fileinfo.url.length
+		}
+	 };
+	 console.log(options);
+	var req = http.request(options,function(res){
+		console.log(res.statusCode);
+		//console.log(options);
+		if(res.statusCode == 200)
+		{
+			var sql = {
+				text:"DELETE from backupfiles where id = $1",
+				values:[fileInfo.id]
+			};
+			query(sql,callback);
+		}
+		else
+		{
+			callback(null,"error");
+		}
+		res.on('data', function(d) {
+			console.log(d);
+			callback(null,"data");
+		  });
+	});
+	req.end();
+
+	req.on('error', function(e) {
+	  console.log(e);
+	  callback(null,e);
+	});
 	/*
 	else if(options.protocol == 'https:')
 	{
