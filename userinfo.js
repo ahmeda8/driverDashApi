@@ -56,9 +56,6 @@ exports.deleteBackup = function(id,callback)
 		path:urlParsed.path+"?key=AQ4LQWd28TyS1wZtDX9Rjz",
 		method:'DELETE',
 		port:80,
-		headers:{
-			"content-length": res.rows[0].download_url.length
-		}
 	 };
 	 console.log(options);
 	var req = http.request(options,function(res){
@@ -79,15 +76,18 @@ exports.deleteBackup = function(id,callback)
 		res.on('data', function(d) {
 			console.log(d);
 			callback(null,"data");
-		  });
+		});
 	});
-	req.end();
-
+	
 	req.on('error', function(e) {
 	  console.log(e);
 	  callback(null,e);
 	});
 	});
+	
+	req.end();
+
+	
 	/*
 	var urlParsed = url.parse(fileinfo.url);
 	 var options ={
