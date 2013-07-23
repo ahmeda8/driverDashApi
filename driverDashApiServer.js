@@ -53,9 +53,9 @@ app.put('/user',function(req,res){
 /*END PUT */
 
 /*Delete API*/
-app.delete('/backup',function(req,res){
-	var info = JSON.parse(req.body.info);
-	console.log(req.body.info);
+app.delete('/backup/:id',function(req,res){
+	var info = req.params.id;
+	//console.log(req.body.info);
 	var ui = require("./userinfo.js");
 	ui.deleteBackup(info,function(err,result){
 		res.send(JSON.stringify(result));

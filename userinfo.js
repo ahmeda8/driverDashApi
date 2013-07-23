@@ -41,8 +41,15 @@ exports.addBackup = function(fileInfo,callback)
 	query(sql,callback);
 };
 
-exports.deleteBackup = function(fileinfo,callback)
+exports.deleteBackup = function(id,callback)
 {
+	var sql = {
+		text:"SELECT * from backupfiles " +
+			 "WHERE backupfiles.id = $1",
+		values:[id]
+		};
+	query(sql,callback);
+	/*
 	var urlParsed = url.parse(fileinfo.url);
 	 var options ={
 		hostname: urlParsed.hostname,
