@@ -57,7 +57,7 @@ exports.deleteBackup = function(id,callback)
 		method:'DELETE',
 		//port:80,
 		headers:{
-			'Content-Length':res.rows[0].download_url.length,
+			'Content-Length':options.path.length,
 			'Connection':'keep-alive',
 			'Content-Type':'text/plain',
 			'User-Agent':'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0'
