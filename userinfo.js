@@ -51,13 +51,14 @@ exports.deleteBackup = function(id,callback)
 	query(sql,function(sql,res){
 		
 	 var urlParsed = url.parse(res.rows[0].download_url);
+	 var urlpath = urlParsed.path+"?key=AQ4LQWd28TyS1wZtDX9Rjz";
 	 var options ={
 		hostname: urlParsed.hostname,
-		path:urlParsed.path+"?key=AQ4LQWd28TyS1wZtDX9Rjz",
+		path:urlpath,
 		method:'DELETE',
 		//port:80,
 		headers:{
-			'Content-Length':options.path.length,
+			'Content-Length':urlpath.length,
 			'Connection':'keep-alive',
 			'Content-Type':'text/plain',
 			'User-Agent':'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0'
