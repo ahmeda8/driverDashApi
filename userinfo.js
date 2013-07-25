@@ -69,7 +69,7 @@ exports.deleteBackup = function(id,callback)
 	var req = https.request(options,function(res){
 		console.log("Status code: "+res.statusCode);
 		//console.log(options);
-		/*
+		
 		if(res.statusCode == 200)
 		{
 			var sql = {
@@ -82,7 +82,7 @@ exports.deleteBackup = function(id,callback)
 		{
 			callback(null,"error");
 		}
-		*/
+		
 		res.on('data', function(d) {
 			console.log(d);
 			callback(null,"data");
