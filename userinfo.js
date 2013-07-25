@@ -59,7 +59,7 @@ exports.deleteBackup = function(id,callback)
 		headers:{
 			'Content-Length':res.rows[0].download_url.length,
 			'Connection':'keep-alive',
-			'Content-Type':'X-NO-STREAM'
+			'Content-Type':'text/plain'
 		}
 	 };
 	 console.log(options);
